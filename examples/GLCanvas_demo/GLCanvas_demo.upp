@@ -1,6 +1,6 @@
 uses
 	CtrlLib,
-	GLCanvas;
+	GLCanvas/GLCanvas;
 
 file
 	main.cpp,

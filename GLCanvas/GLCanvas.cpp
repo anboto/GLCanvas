@@ -6,10 +6,10 @@
 #include <PdfDraw/PdfDraw.h>
 
 #define IMAGECLASS GLCanvasImg
-#define IMAGEFILE <GLCanvas/GLCanvas.iml>
+#define IMAGEFILE <GLCanvas/GLCanvas/GLCanvas.iml>
 #include <Draw/iml.h>
 
-#include <GLCanvas/GLCanvas.h>
+#include <GLCanvas/GLCanvas/GLCanvas.h>
 
 namespace Upp {
 
