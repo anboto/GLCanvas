@@ -5,7 +5,7 @@
 
 #include <GLCtrl/GLCtrl.h>
 #include "trackball.h"
-#include <Surface/Surface/Surface.h>
+#include <Surface/Surface.h>
 
 namespace Upp {
 	
