@@ -385,7 +385,7 @@ void GLCanvas::PaintCuboid(const Point3D &p0, const Point3D &p1, const Color &co
 }
 
 void GLCanvas::PaintSegments(const Vector<Segment3D>& segs, const Color &color) {
-	for (int i = 0; i < segs.GetCount(); ++i) 
+	for (int i = 0; i < segs.size(); ++i) 
 		PaintLine(segs[i], color);
 }
 
@@ -398,13 +398,13 @@ void GLCanvas::PaintMesh(const Point3D &p0, const Point3D &p1, const Point3D &p2
 
 void GLCanvas::PaintSurface0(const Vector<Point3D> &nodes, const Vector<Panel> &panels, bool showMesh, bool showNormals, 
 							double len, const Color &linCol) {
-	for (int ip = 0; ip < panels.GetCount(); ++ip) {
+	for (int ip = 0; ip < panels.size(); ++ip) {
 		const Panel &panel = panels[ip];
 		if (showMesh) {
-			Point3D p0 = nodes[panel.id[0]];
-			Point3D p1 = nodes[panel.id[1]];
-			Point3D p2 = nodes[panel.id[2]];
-			Point3D p3 = nodes[panel.id[3]];
+			const Point3D &p0 = nodes[panel.id[0]];
+			const Point3D &p1 = nodes[panel.id[1]];
+			const Point3D &p2 = nodes[panel.id[2]];
+			const Point3D &p3 = nodes[panel.id[3]];
 			PaintMesh(p0, p1, p2, p3, linCol);
 		}
 		if (showNormals) {
@@ -416,6 +416,19 @@ void GLCanvas::PaintSurface0(const Vector<Point3D> &nodes, const Vector<Panel> &
 
 void GLCanvas::PaintSurface(const Surface &surf, const Color &linCol, bool showMesh, bool showNormals) {
 	PaintSurface0(surf.nodes, surf.panels, showMesh, showNormals, surf.avgFacetSideLen, linCol);
+}
+
+void GLCanvas::PaintSegments(const Surface &surf, const Color &linCol) {
+	float lt = lineThickness;
+	lineThickness *= 3;
+	for (int is = 0; is < surf.segments.size(); ++is) {
+		const Segment &seg = surf.segments[is];
+		
+		const Point3D &p0 = surf.nodes[seg.inode0];
+		const Point3D &p1 = surf.nodes[seg.inode1];
+		PaintLine(p0, p1, linCol);
+	}
+	lineThickness = lt;
 }
 
 }

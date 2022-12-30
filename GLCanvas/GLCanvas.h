@@ -68,6 +68,7 @@ public:
 	void PaintCuboid(const Point3D &p0, const Point3D &p1, const Color &color);	
 	void PaintSurface(const Surface &surf, const Color &linCol, bool showMesh, bool showNormals);
 	void PaintSegments(const Vector<Segment3D>& segs, const Color &color);
+	void PaintSegments(const Surface &surf, const Color &linCol);
 	void PaintAxis(double x, double y, double z, double len);
 	void PaintAxis(const Point3D &p, double len);
 	void PaintDoubleAxis(double x, double y, double z, double len, const Color &color);
