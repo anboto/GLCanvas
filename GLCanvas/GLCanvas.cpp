@@ -389,6 +389,12 @@ void GLCanvas::PaintSegments(const Vector<Segment3D>& segs, const Color &color) 
 		PaintLine(segs[i], color);
 }
 
+void GLCanvas::PaintLines(const Array<Vector<Point3D>>& lines, const Color &color) {
+	for (const Vector<Point3D> &l : lines) 
+		for (int i = 0; i < l.size()-1; ++i)
+			PaintLine(l[i], l[i+1], color);
+}
+
 void GLCanvas::PaintMesh(const Point3D &p0, const Point3D &p1, const Point3D &p2, const Point3D &p3, const Color &linCol) {
 	PaintLine(p0, p1, linCol);
 	PaintLine(p1, p2, linCol);
