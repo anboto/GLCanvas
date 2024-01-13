@@ -426,7 +426,7 @@ void GLCanvas::PaintSurface(const Surface &surf, const Color &linCol, bool showM
 
 void GLCanvas::PaintSegments(const Surface &surf, const Color &linCol) {
 	float lt = lineThickness;
-	lineThickness *= 3;
+	//lineThickness *= 3;
 	for (int is = 0; is < surf.segments.size(); ++is) {
 		const LineSegment &seg = surf.segments[is];
 		
@@ -434,7 +434,7 @@ void GLCanvas::PaintSegments(const Surface &surf, const Color &linCol) {
 		const Point3D &p1 = surf.nodes[seg.inode1];
 		PaintLine(p0, p1, linCol);
 	}
-	lineThickness = lt;
+	//lineThickness = lt;
 }
 
 }
