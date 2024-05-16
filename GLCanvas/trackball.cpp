@@ -12,10 +12,10 @@ TrackBall::TrackBall() {
 	tracking = false;
 	zoomAngle = 10;
 	sign = true;
-	ViewXYZ(true, true, true, sign);
+	ViewXYZ(true, true, true/*, sign*/);
 }
 
-void TrackBall::ViewXYZ(bool x, bool y, bool z, bool sign) {
+void TrackBall::ViewXYZ(bool x, bool y, bool z) {
 	curquat[0] = curquat[1] = curquat[2] = curquat[3] = 0;
 	if (x && y && z) {
 		if (sign) {

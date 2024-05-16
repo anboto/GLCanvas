@@ -248,7 +248,7 @@ void GLCanvas::View(bool x, bool y, bool z) {
 	else
 		sign = true;
 	lastx = x; lasty = y; lastz = z;
-	trackBall.ViewXYZ(x, y, z, sign);	
+	trackBall.ViewXYZ(x, y, z/*, sign*/);	
 	Refresh();
 }
 

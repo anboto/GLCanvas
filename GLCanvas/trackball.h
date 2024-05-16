@@ -23,7 +23,7 @@ public:
 	virtual Image MouseEvent(int event, Point p, int zdelta, dword keyflags);
 	
 	void Zoom(int zdelta);
-	void ViewXYZ(bool x, bool y, bool z, bool sign = true);
+	void ViewXYZ(bool x, bool y, bool z);
 	
 	double curquat[4];
 	
