@@ -94,9 +94,9 @@ Image GLCanvas::GetImage() {
 		memcpy(ib[sz.cy-1-i], temp, sz.cx*sizeof(RGBA));
 	}
 	
-	for (int i = 0; i < sz.cy; i++)
+	for (int y = 0; y < sz.cy; y++)
 		for (int x = 0; x < sz.cx; x++) 
-			ib[i][x].a = 255;
+			ib[y][x].a = 255;
 
 	return ib;
 }
