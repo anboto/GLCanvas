@@ -302,7 +302,7 @@ void GLCanvas::PaintLine(const Segment3D &p, const Color &color) {
 
 void GLCanvas::PaintArrow(double x0, double y0, double z0, double x1, double y1, double z1, const Color &color) {
 	Segment3D seg(Point3D(x0, y0, z0), Point3D(x1, y1, z1));
-	Direction3D vector = seg.Direction().Normalize();
+	Vector3D vector = seg.Direction().Normalize();
 	double len = seg.Length();
 	double lenArr = 0.8*len;
 	Point3D pointTri(x0, y0, z0);
