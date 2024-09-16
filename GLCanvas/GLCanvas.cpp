@@ -283,8 +283,8 @@ void GLCanvas::OnPaint() {
 	glPopMatrix();
 }
 
-void GLCanvas::PaintLine(double x0, double y0, double z0, double x1, double y1, double z1, const Color &color) {
-	glLineWidth(lineThickness); 
+void GLCanvas::PaintLine(double x0, double y0, double z0, double x1, double y1, double z1, const Color &color, float thick) {
+	glLineWidth(thick); 
 	glBegin(GL_LINES);
 		glColor4d(color.GetR()/255., color.GetG()/255., color.GetB()/255., 1);
 		glVertex3d(x0, y0, z0);
@@ -292,12 +292,12 @@ void GLCanvas::PaintLine(double x0, double y0, double z0, double x1, double y1, 
 	glEnd();
 }
 
-void GLCanvas::PaintLine(const Point3D &p0, const Point3D &p1, const Color &color) {
-	PaintLine(p0.x, p0.y, p0.z, p1.x, p1.y, p1.z, color);
+void GLCanvas::PaintLine(const Point3D &p0, const Point3D &p1, const Color &color, float thick) {
+	PaintLine(p0.x, p0.y, p0.z, p1.x, p1.y, p1.z, color, thick);
 }
 
-void GLCanvas::PaintLine(const Segment3D &p, const Color &color) {
-	PaintLine(p.from, p.to, color);
+void GLCanvas::PaintLine(const Segment3D &p, const Color &color, float thick) {
+	PaintLine(p.from, p.to, color, thick);
 }
 
 void GLCanvas::PaintArrow(double x0, double y0, double z0, double x1, double y1, double z1, const Color &color) {
@@ -313,10 +313,10 @@ void GLCanvas::PaintArrow(double x0, double y0, double z0, double x1, double y1,
 	Point3D parr1(pointTri.x + 0.1*len*sin(nangle), pointTri.y + 0.1*len*cos(nangle), pointTri.z); 
 	Point3D parr2(pointTri.x - 0.1*len*sin(nangle), pointTri.y - 0.1*len*cos(nangle), pointTri.z); 
 	
-	PaintLine(seg.from, pointTri, color);
-	PaintLine(seg.to,   parr1, 	  color);
-	PaintLine(seg.to,   parr2,    color);
-	PaintLine(parr1,    parr2,    color);
+	PaintLine(seg.from, pointTri, color, lineThickness);
+	PaintLine(seg.to,   parr1, 	  color, lineThickness);
+	PaintLine(seg.to,   parr2,    color, lineThickness);
+	PaintLine(parr1,    parr2,    color, lineThickness);
 }
 
 void GLCanvas::PaintArrow(const Point3D &p0, const Point3D &p1, const Color &color) {
@@ -348,9 +348,9 @@ void GLCanvas::PaintDoubleAxis(const Point3D &p, double len, const Color &color)
 }
 
 void GLCanvas::PaintDoubleAxis(double x, double y, double z, double len, const Color &color) {
-	PaintLine(x-len/2, y	  , z	   , x+len/2, y	     , z	  , color);
-	PaintLine(x		 , y-len/2, z	   , x		, y+len/2, z	  , color);
-	PaintLine(x		 , y	  , z-len/2, x		, y	     , z+len/2, color);
+	PaintLine(x-len/2, y	  , z	   , x+len/2, y	     , z	  , color, lineThickness);
+	PaintLine(x		 , y-len/2, z	   , x		, y+len/2, z	  , color, lineThickness);
+	PaintLine(x		 , y	  , z-len/2, x		, y	     , z+len/2, color, lineThickness);
 }
 
 void GLCanvas::PaintCube(const Point3D &p, double side, const Color &color) {
@@ -386,20 +386,19 @@ void GLCanvas::PaintCuboid(const Point3D &p0, const Point3D &p1, const Color &co
 
 void GLCanvas::PaintSegments(const Vector<Segment3D>& segs, const Color &color) {
 	for (int i = 0; i < segs.size(); ++i) 
-		PaintLine(segs[i], color);
+		PaintLine(segs[i], color, lineThickness);
 }
 
-void GLCanvas::PaintLines(const Array<Vector<Point3D>>& lines, const Color &color) {
-	for (const Vector<Point3D> &l : lines) 
-		for (int i = 0; i < l.size()-1; ++i)
-			PaintLine(l[i], l[i+1], color);
+void GLCanvas::PaintLines(const Vector<Point3D>& line, const Color &color) {
+	for (int i = 0; i < line.size()-1; ++i)
+		PaintLine(line[i], line[i+1], color, lineThickness*3);
 }
 
 void GLCanvas::PaintMesh(const Point3D &p0, const Point3D &p1, const Point3D &p2, const Point3D &p3, const Color &linCol) {
-	PaintLine(p0, p1, linCol);
-	PaintLine(p1, p2, linCol);
-	PaintLine(p2, p3, linCol);
-	PaintLine(p3, p0, linCol);
+	PaintLine(p0, p1, linCol, lineThickness);
+	PaintLine(p1, p2, linCol, lineThickness);
+	PaintLine(p2, p3, linCol, lineThickness);
+	PaintLine(p3, p0, linCol, lineThickness);
 }
 
 void GLCanvas::PaintSurface0(const Vector<Point3D> &nodes, const Vector<Panel> &panels, bool showMesh, bool showNormals, 
@@ -425,16 +424,13 @@ void GLCanvas::PaintSurface(const Surface &surf, const Color &linCol, bool showM
 }
 
 void GLCanvas::PaintSegments(const Surface &surf, const Color &linCol) {
-	//float lt = lineThickness;
-	//lineThickness *= 3;
 	for (int is = 0; is < surf.segments.size(); ++is) {
 		const LineSegment &seg = surf.segments[is];
 		
 		const Point3D &p0 = surf.nodes[seg.inode0];
 		const Point3D &p1 = surf.nodes[seg.inode1];
-		PaintLine(p0, p1, linCol);
+		PaintLine(p0, p1, linCol, lineThickness);
 	}
-	//lineThickness = lt;
 }
 
 }
