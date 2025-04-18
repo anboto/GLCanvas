@@ -11,6 +11,8 @@
 
 #include <GLCanvas/GLCanvas.h>
 
+#include <Functions4U/EnableWarnings.h>
+
 namespace Upp {
 
 GLCanvas::GLCanvas() {
@@ -87,11 +89,12 @@ Image GLCanvas::GetImage() {
 	if (GL_NO_ERROR != glGetError())
 		return Null;
 	
-	Buffer<RGBA> temp(sz.cx);
+	size_t cx = (size_t)sz.cx;
+	Buffer<RGBA> temp(cx);
 	for(int i = 0; i < sz.cy/2; i++){
-		memcpy(temp,ib[i], sz.cx*sizeof(RGBA));
-		memcpy(ib[i], ib[sz.cy-1-i], sz.cx*sizeof(RGBA));
-		memcpy(ib[sz.cy-1-i], temp, sz.cx*sizeof(RGBA));
+		memcpy(temp,ib[i], cx*sizeof(RGBA));
+		memcpy(ib[i], ib[sz.cy-1-i], cx*sizeof(RGBA));
+		memcpy(ib[sz.cy-1-i], temp, cx*sizeof(RGBA));
 	}
 	
 	for (int y = 0; y < sz.cy; y++)

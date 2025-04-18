@@ -5,6 +5,8 @@
 
 #include <GL/glu.h>
 
+#include <Functions4U/EnableWarnings.h>
+
 namespace Upp {
 	
 TrackBall::TrackBall() {
