@@ -10,7 +10,6 @@
 namespace Upp {
 	
 TrackBall::TrackBall() {
-	owner = NULL;
 	tracking = false;
 	zoomAngle = 10;
 	sign = true;
@@ -44,8 +43,7 @@ void TrackBall::ViewXYZ(bool x, bool y, bool z) {
 	}
 }
 
-void TrackBall::Init(Ctrl *ow, int _buttonRot) {
-	owner = ow;
+void TrackBall::Init(int _buttonRot) {
 	buttonRot = _buttonRot;
 }
 

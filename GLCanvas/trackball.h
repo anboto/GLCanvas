@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-// Copyright 2021 - 2022, the Anboto author and contributors
+// Copyright 2021 - 2025, the Anboto author and contributors
 #ifndef _FTGL_Demo_TrackBall_h_
 #define _FTGL_Demo_TrackBall_h_
 
@@ -12,7 +12,7 @@ public:
 	typedef TrackBall CLASSNAME;
 
 	TrackBall();
-	void Init(Ctrl *owner, int buttonRot);
+	void Init(int buttonRot);
 	
 	void Matrix(void);
 	void Reshape(int width, int height);
@@ -28,8 +28,6 @@ public:
 	double curquat[4];
 	
 private:
-	Ctrl *owner;
-
 	double lastquat[4];
 	int beginx, beginy;
 	

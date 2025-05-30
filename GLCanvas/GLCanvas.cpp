@@ -20,7 +20,7 @@ GLCanvas::GLCanvas() {
 	
 	WantFocus();
 	
-	trackBall.Init(this, Ctrl::LEFT);
+	trackBall.Init(Ctrl::LEFT);
 	buttonContext = Ctrl::RIGHT;
 	
 	SetCamera();
