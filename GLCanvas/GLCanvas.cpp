@@ -11,7 +11,6 @@
 
 #include <GLCanvas/GLCanvas.h>
 
-#include <Functions4U/EnableWarnings.h>
 
 namespace Upp {
 
